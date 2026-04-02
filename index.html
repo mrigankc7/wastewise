@@ -391,20 +391,6 @@
       <div class="tip-box" id="resTip"></div>
     </div>
 
-    <!-- API section -->
-    <div class="api-section">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
-        <span class="status-dot s-idle" id="statusDot"></span>
-        <span class="api-title">Model API endpoint</span>
-      </div>
-      <p style="font-size:12px;color:#3B6D11;margin-bottom:8px">Paste your Hugging Face Spaces URL below and click Save.</p>
-      <div class="api-row">
-        <input class="api-input" id="apiUrl" type="url" placeholder="https://username-wastewise.hf.space" />
-        <button class="btn-save" onclick="saveUrl()">Save</button>
-      </div>
-      <p style="font-size:11px;color:#3B6D11;margin-top:6px" id="statusMsg">Not connected</p>
-    </div>
-
     <p class="footer">
       Every correctly sorted item makes a difference.<br>Sort wisely. Sustain longer.
     </p>
@@ -438,7 +424,7 @@
     grid.appendChild(el);
   });
 
-  let apiEndpoint = localStorage.getItem('wastewise_api') || '';
+  let apiEndpoint = localStorage.getItem('wastewise_api') || 'https://mrigankj7-wastewise.hf.space';;
   let selectedBlob = null;
   let stream = null;
 
@@ -447,21 +433,21 @@
     setStatus('ok');
   }
 
-  function saveUrl() {
-    const v = document.getElementById('apiUrl').value.trim();
-    if (!v) return;
-    apiEndpoint = v.replace(/\/$/,'');
-    localStorage.setItem('wastewise_api', apiEndpoint);
-    setStatus('ok');
-  }
+  // function saveUrl() {
+  //   const v = document.getElementById('apiUrl').value.trim();
+  //   if (!v) return;
+  //   apiEndpoint = v.replace(/\/$/,'');
+  //   localStorage.setItem('wastewise_api', apiEndpoint);
+  //   setStatus('ok');
+  // }
 
-  function setStatus(s) {
-    const dot = document.getElementById('statusDot');
-    const msg = document.getElementById('statusMsg');
-    if (s === 'ok')  { dot.className = 'status-dot s-ok';  msg.textContent = 'Connected — ready to classify'; }
-    else if (s === 'err') { dot.className = 'status-dot s-err'; msg.textContent = 'Cannot reach API. Is it running?'; }
-    else             { dot.className = 'status-dot s-idle'; msg.textContent = 'Not connected'; }
-  }
+  // function setStatus(s) {
+  //   const dot = document.getElementById('statusDot');
+  //   const msg = document.getElementById('statusMsg');
+  //   if (s === 'ok')  { dot.className = 'status-dot s-ok';  msg.textContent = 'Connected — ready to classify'; }
+  //   else if (s === 'err') { dot.className = 'status-dot s-err'; msg.textContent = 'Cannot reach API. Is it running?'; }
+  //   else             { dot.className = 'status-dot s-idle'; msg.textContent = 'Not connected'; }
+  // }
 
   async function switchTab(tab) {
     document.getElementById('tabUpload').classList.toggle('active', tab === 'upload');
